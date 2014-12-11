@@ -1,5 +1,5 @@
 {
-  "name": "Styledocco",
+  "name": "coremedia-styledocco",
   "description": "Generate documentation and style guides with design patterns from stylesheets.",
   "keywords": [ "styleguide", "css", "documentation", "design", "patterns" ],
   "author": "Coremedia",
