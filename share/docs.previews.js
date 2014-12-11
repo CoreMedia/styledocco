@@ -53,13 +53,9 @@ var headEl = document.getElementsByTagName('head')[0];
 var bodyEl = document.getElementsByTagName('body')[0];
 
 // Get preview styles intended for preview iframes.
-var styles = pluck(
-  headEl.querySelectorAll('style[type="text/preview"]'),
-  'innerHTML').join('');
+var styles = pluck(headEl.querySelectorAll('style[type="text/preview"]'),'innerHTML').join('');
 // Get preview scripts intended for preview iframes.
-var scripts = pluck(
-  headEl.querySelectorAll('script[type="text/preview"]'),
-  'innerHTML').join('');
+var scripts = pluck(headEl.querySelectorAll('script[type="text/preview"]'),'innerHTML').join('');
 
 var previewUrl = location.href.split('#')[0] + '#__preview__';
 
@@ -69,6 +65,8 @@ iframeEl.src = 'data:text/html,';
 bodyEl.appendChild(iframeEl);
 iframeEl.addEventListener('load', function() {
   var support = { sameOriginDataUri: true };
+  var section = document.querySelector("section").children;
+  var id = "";
   try {
     this.contentDocument;
     if (!this.contentDocument) support.sameOriginDataUri = false;
@@ -76,16 +74,21 @@ iframeEl.addEventListener('load', function() {
     support.sameOriginDataUri = false;
   }
   this.parentNode.removeChild(this);
-  // Loop through code textareas and render the code in iframes.
-  forEach(bodyEl.getElementsByTagName('textarea'), function(codeEl, idx) {
-    addIframe(codeEl, support, idx);
-    resizeableButtons();
-    autoResizeTextArea(codeEl);
-  });
+
+  var count = 0;
+  do {
+    id = section[count].id
+    // Loop through code textareas and render the code in iframes.
+    var textarea = section[count].querySelectorAll('textarea');
+    for (var i = 0; i < textarea.length; i++) {
+      addIframe(textarea[i], support, i, id);
+    };
+    count++;
+  } while (count <= section.length-1);
 });
 
-var addIframe = function(codeEl, support, iframeId) {
-  var previewEl, resizeableEl, iframeEl;
+var addIframe = function(codeEl, support, iframeId, articleID) {
+  var previewEl, resizeableEl, iframeEl, height;
   previewEl = document.createElement('div');
   previewEl.appendChild(resizeableEl = document.createElement('div'));
   previewEl.className = 'preview';
@@ -94,7 +97,7 @@ var addIframe = function(codeEl, support, iframeId) {
   iframeEl.setAttribute('scrolling', 'no');
   iframeEl.name = 'iframe' + iframeId++;
   iframeEl.addEventListener('load', function() {
-    var htmlEl, bodyEl, scriptEl, styleEl, headEl, oldHeadEl, doc;
+    var htmlEl, bodyEl, scriptEl, styleEl, headEl, oldHeadEl, doc, styleDocco, scriptDocco;
     doc = this.contentDocument;
     // Abort if we're loading a data uri in a browser without same
     // origin data uri support.
@@ -106,6 +109,7 @@ var addIframe = function(codeEl, support, iframeId) {
       htmlEl.appendChild(doc.createElement('head'));
       htmlEl.appendChild(bodyEl = doc.createElement('body'));
       bodyEl.innerHTML = codeEl.textContent;
+      bodyEl.className = "docco docco--"+articleID;
       doc.replaceChild(htmlEl, doc.documentElement);
     }
     // Add scripts and styles.
@@ -116,6 +120,24 @@ var addIframe = function(codeEl, support, iframeId) {
     styleEl.textContent = styles;
     oldHeadEl = doc.getElementsByTagName('head')[0];
     oldHeadEl.parentNode.replaceChild(headEl, oldHeadEl);
+
+    styleDocco = document.createElement("link");
+    styleDocco.setAttribute("rel", "stylesheet");
+    styleDocco.setAttribute("type", "text/css");
+    styleDocco.setAttribute("href", "../styleguide/css/docco.css");
+    headEl.appendChild(styleDocco);
+
+    if(bodyEl.offsetHeight < 35){
+      height = 35;
+    }
+    else {
+      height = bodyEl.offsetHeight;
+    }
+
+    resizeableEl.setAttribute('style', 'height:'+height+'px');
+
+    autoResizeTextArea(codeEl);
+
     postMessage(this, 'getHeight');
   });
   var iframeSrc;
@@ -144,18 +166,16 @@ var autoResizeTextArea = function(el) {
   mirrorEl.style.position = 'absolute';
   mirrorEl.style.left = '-9999px';
   bodyEl.appendChild(mirrorEl);
-  var maxHeight = parseInt(
-    window.getComputedStyle(el).getPropertyValue('max-height'),
-    10);
+  var maxHeight = parseInt(window.getComputedStyle(el).getPropertyValue('max-height'), 10);
   var codeDidChange = function(ev) {
     mirrorEl.textContent = this.value + '\n';
-    var height = mirrorEl.offsetHeight + 2; // Account for borders.
+    var height = mirrorEl.offsetHeight + 2;
     if (height >= maxHeight) {
       this.style.overflow = 'auto';
     } else {
       this.style.overflow = 'hidden';
     }
-    this.style.height = (mirrorEl.offsetHeight + 2) + 'px';
+    this.style.height = (mirrorEl.offsetHeight) + 'px';
   };
   el.addEventListener('keypress', codeDidChange);
   el.addEventListener('keyup', codeDidChange);
