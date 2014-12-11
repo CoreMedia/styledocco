@@ -1,15 +1,36 @@
 {
   "name": "coremedia-styledocco",
   "description": "Generate documentation and style guides with design patterns from stylesheets.",
-  "keywords": [ "styleguide", "css", "documentation", "design", "patterns" ],
+  "keywords": [
+    "styleguide",
+    "css",
+    "documentation",
+    "design",
+    "patterns"
+  ],
   "author": "Coremedia",
-  "contributors": ["David Marrs <david@marrsbytes.com>", "Jacob Rask <jacob@jacobrask.net>"],
+  "contributors": [
+    "David Marrs <david@marrsbytes.com>",
+    "Jacob Rask <jacob@jacobrask.net>"
+  ],
   "version": "0.7.0",
   "homepage": "http://www.coremedia.com",
-  "licenses": [ { "type": "MIT", "url": "http://github.com/CoreMedia/styledocco/raw/master/LICENSE" } ],
-  "bugs": { "url": "https://github.com/CoreMedia/styledocco/issues" },
-  "repository": { "type": "git", "url": "git://github.com/CoreMedia/styledocco.git" },
-  "engines": { "node": ">=0.4.0" },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://github.com/CoreMedia/styledocco/raw/master/LICENSE"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/CoreMedia/styledocco/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/CoreMedia/styledocco.git"
+  },
+  "engines": {
+    "node": ">=0.4.0"
+  },
   "preferGlobal": true,
   "dependencies": {
     "async": "0.1.x",
@@ -18,8 +39,10 @@
     "jade": "0.23.x",
     "marked": "0.2.x",
     "mkdirp": "0.x.x",
+    "open": "0.0.5",
     "optimist": "0.x.x",
-    "uglify-js": "1.2.x" },
+    "uglify-js": "1.2.x"
+  },
   "devDependencies": {
     "browserify": "1.13.x",
     "jshint": "0.7.x",
