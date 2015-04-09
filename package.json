@@ -13,7 +13,7 @@
     "David Marrs <david@marrsbytes.com>",
     "Jacob Rask <jacob@jacobrask.net>"
   ],
-  "version": "0.7.0",
+  "version": "0.7.1",
   "homepage": "http://www.coremedia.com",
   "licenses": [
     {
@@ -31,22 +31,21 @@
   "engines": {
     "node": ">=0.4.0"
   },
-  "preferGlobal": true,
   "dependencies": {
-    "async": "0.1.x",
-    "clean-css": "0.4.x",
-    "findit": "~1.1.0",
-    "jade": "0.23.x",
-    "marked": "0.2.x",
+    "async": "0.9.x",
+    "clean-css": "3.1.x",
+    "findit": "~2.0.0",
+    "jade": "1.9.x",
+    "marked": "0.3.x",
     "mkdirp": "0.x.x",
     "open": "0.0.5",
     "optimist": "0.x.x",
-    "uglify-js": "1.2.x"
+    "uglify-js": "2.4.x"
   },
   "devDependencies": {
-    "browserify": "1.13.x",
-    "jshint": "0.7.x",
-    "nodeunit": "0.7.x",
+    "browserify": "9.0.x",
+    "jshint": "2.6.x",
+    "nodeunit": "0.9.x",
     "chai": "latest",
     "mocha": "latest"
   },

@@ -1,27 +1,33 @@
-StyleDocco
+CoreMedia StyleDocco
 ==========
+
+This is a fork of https://github.com/jacobrask/styledocco
 
 StyleDocco generates documentation and style guide documents from your stylesheets.
 
-Stylesheet comments will be parsed through [Markdown](http://en.wikipedia.org/wiki/Markdown) and displayed in a generated HTML document. You can write HTML code prefixed with 4 spaces or between [code fences](http://github.github.com/github-flavored-markdown/) (<code>```</code>) in your comments, and StyleDocco show a preview with the styles applied, and displays the example HTML code. 
+Stylesheet comments will be parsed through [Markdown](http://en.wikipedia.org/wiki/Markdown) and displayed in a
+generated HTML document. You can write HTML code prefixed with 4 spaces or between
+[code fences](http://github.github.com/github-flavored-markdown/) (<code>```</code>) in your comments, and StyleDocco
+show a preview with the styles applied, and displays the example HTML code.
 
-The previews are rendered in a resizable iframes to make it easy to demonstrate responsive designs at different viewport sizes.
-
-Suggestions, feature requests and bug reports are welcome either at [GitHub](https://github.com/jacobrask/styledocco/issues) or on Twitter ([@jacobrask](https://twitter.com/jacobrask)).
+The previews are rendered in a resizable iframes to make it easy to demonstrate responsive designs at different
+viewport sizes.
 
 
 Installation
 ------------
 
-StyleDocco requires [Node.js](http://nodejs.org). After installing Node.js, run `npm install -fg styledocco` or clone this repository and run `./bin/styledocco`.
+StyleDocco requires [Node.js](http://nodejs.org). After installing Node.js, run `npm install styledocco` or clone this
+repository and run `./bin/styledocco`.
 
-StyleDocco is free and open source software, released under the [MIT license](https://raw.github.com/jacobrask/styledocco/master/LICENSE).
+StyleDocco is free and open source software, released under the
+[MIT license](https://raw.github.com/jacobrask/styledocco/master/LICENSE).
 
 
 Usage
 =====
 
-`styledocco [options] [STYLESHEET(S)]`
+`coremedia-styledocco [options] [STYLESHEET(S)]`
 
 Options
 -------
@@ -38,11 +44,12 @@ Usage examples
 
 Generate documentation for *My Project* in the `docs` folder, from the files in the `css` directory.
 
-`styledocco -n "My Project" css`
+`coremedia-styledocco -n "My Project" css`
 
-Generate documentation for *My Project* in the `mydocs` folder, from source files in the `styles` folder. Use the `--compass` option for SASS to make Compass imports available.
+Generate documentation for *My Project* in the `mydocs` folder, from source files in the `styles` folder. Use the
+`--compass` option for SASS to make Compass imports available.
 
-`styledocco -n "My Project" -o mydocs -s mydocs --preprocessor "scss --compass" styles`
+`coremedia-styledocco -n "My Project" -o mydocs -s mydocs --preprocessor "scss --compass" styles`
 
 
 Syntax
@@ -75,6 +82,14 @@ Tips and tricks
 
 Change Log
 ==========
+
+v0.7.1 - Apr 09, 2015
+---------------------
+
+ * disable "preferGlobal"
+ * update dependecies
+ * update README
+ * update .gitignore
 
 v0.6.6 - Jan 28, 2014
 ---------------------
